@@ -143,14 +143,30 @@ ForecastIO.prototype.getCachedWeather = function(lat, lon, cb) {
   var me = this;
 
   store.find({latlon:key}, function(err, result) {
+    if(err) {
+      me.log('error getting cache from db');
+      me.log(err);
+      cb(err);
+      return;
+    }
 
     me.checkCachedResults(store, result, function(err, data) {
+      if(err) {
+        cb(err);
+        return;
+      }
       if(data) {
         me.log('from cache');
         cb(null, data);
       } else {
         me.log('cache empty');
         me.getWeather(lat, lon, function(err, data) {
+          if(err) {
+            me.log('error getting weather information');
+            me.log(err);
+            cb(err);
+            return;
+          }
           store.insert({
             latlon: key,
             data: data,
