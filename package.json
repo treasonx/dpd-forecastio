@@ -1,0 +1,11 @@
+{
+  "name": "dpd-forecastio",
+  "version": "0.1",
+  "description": "Deployd Resource Wrapper for forecast.io weather information",
+  "repository": "",
+  "author": "James Morrin",
+  "license": "BSD",
+  "dependencies": {
+    "forecast.io": "0.0.4"
+  }
+}
